@@ -14,6 +14,7 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
     [Area("Admin")]
     public class BrandNamesController : Controller
     {
+        
         private readonly ApplicationDbContext _context;
 
         public BrandNamesController(ApplicationDbContext context)
@@ -62,7 +63,7 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
             {
                 _context.Add(brandNames);
                 await _context.SaveChangesAsync();
-                TempData["save"] = "New Brand has been Added";
+                TempData["save"] = "New Brand has been Added!";
                 return RedirectToAction(nameof(Index));
             }
             return View(brandNames);
