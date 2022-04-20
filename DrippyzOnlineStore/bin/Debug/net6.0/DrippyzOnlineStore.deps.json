@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "DrippyzOnlineStore/1.0.0": {
         "dependencies": {
+          "FluentAssertions": "6.6.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.2",
           "Microsoft.AspNetCore.Identity.UI": "6.0.2",
@@ -18,6 +19,17 @@
         },
         "runtime": {
           "DrippyzOnlineStore.dll": {}
+        }
+      },
+      "FluentAssertions/6.6.0": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "4.7.0"
+        },
+        "runtime": {
+          "lib/net6.0/FluentAssertions.dll": {
+            "assemblyVersion": "6.6.0.0",
+            "fileVersion": "6.6.0.0"
+          }
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -2359,6 +2371,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "FluentAssertions/6.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gBsgPrNRkzUQfnxZSKnU0oVILIc5dr+dmdKXscyYKD5URcwNVQ72a7uuCvTyBzRZW98MZQNolSYC0y/MQTJ03A==",
+      "path": "fluentassertions/6.6.0",
+      "hashPath": "fluentassertions.6.6.0.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

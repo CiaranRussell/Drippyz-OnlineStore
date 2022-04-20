@@ -11,6 +11,10 @@ namespace DrippyzOnlineStore.Data
         {
         }
 
-        public DbSet<BrandNames> BrandNames { get; set; }
+        public DbSet<DrippyzOnlineStore.Models.BrandNames> BrandNames { get; set; }
+
+        public DbSet<DrippyzOnlineStore.Models.SpecialTag> SpecialTag { get; set; }
+
+        public DbSet<DrippyzOnlineStore.Models.Product> Products { get; set; }
     }
 }
