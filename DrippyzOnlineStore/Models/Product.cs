@@ -24,20 +24,23 @@ namespace DrippyzOnlineStore.Models
         [MaxLength(140, ErrorMessage = "Description must not contain more than 140 characters")]
         public string ProductDescription { get; set; }
 
+        public string Image { get; set; }
+
         [DisplayName("Available")]
         public bool IsAvailable { get; set; }
-
+        //[Required(ErrorMessage = "Brand Name is required")]
         [DisplayName("Brand Name")]
-        public int BrandNameID { get; set; }
+        public int BrandNameID { get; set; } 
 
-        [ForeignKey("Brand-ID")]
+        [ForeignKey("BrandNameID")]
         public BrandNames BrandID { get; set; }
 
+        //[Required(ErrorMessage = "Special Tag is required")]
         [DisplayName("Special Tag")]
-        public int SpecialTagID { get; set; }
+        public int SpecialTagID { get; set; } 
 
-        [ForeignKey("SpecialTag-ID")]
-        public SpecialTag SpecialTag { get; set; }
+        [ForeignKey("SpecialTagID")]
+        public SpecialTag SpecialTag { get; set; } 
         
     }
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DrippyzOnlineStore.Models.Product>
+﻿@using DrippyzOnlineStore.Models;
+@model IEnumerable<DrippyzOnlineStore.Models.Product>
 
 @{
     ViewData["Title"] = "Index";
@@ -49,10 +50,10 @@
                 @Html.DisplayFor(modelItem => item.IsAvailable)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BrandNameID)
+                @Html.DisplayFor(modelItem =>item.BrandID.Brand)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SpecialTagID)
+                @Html.DisplayFor(modelItem =>item.SpecialTag.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductCode">Edit</a> |

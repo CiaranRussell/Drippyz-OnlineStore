@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DrippyzOnlineStore.Data;
 using DrippyzOnlineStore.Models;
+//using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+
 
 namespace DrippyzOnlineStore.Areas.Admin.Controller1
 {
@@ -15,16 +17,18 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private IWebHostEnvironment _environment;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Admin/Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            return View(await _context.Products.Include(c=>c.BrandID).Include(f=>f.SpecialTag).ToListAsync());
         }
 
         // GET: Admin/Products/Details/5
@@ -48,6 +52,8 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
         // GET: Admin/Products/Create
         public IActionResult Create()
         {
+            ViewData["brandNameID"] = new SelectList(_context.BrandNames.ToList(), "Id", "Brand");
+            ViewData["TagID"] = new SelectList(_context.SpecialTag.ToList(), "Id", "Name");
             return View();
         }
 
@@ -56,10 +62,27 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductCode,ProductName,ProductPrice,ProductDescription,IsAvailable,BrandNameID,SpecialTagID")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductCode,ProductName,ProductPrice,ProductDescription,Image,IsAvailable,BrandNameID,SpecialTagID")] Product product, IFormFile image)
         {
+            ModelState.Remove("Image");
+            ModelState.Remove("BrandID");
+            ModelState.Remove("SpecialTag");
+            //ModelState["ProductCode"].Errors.Clear();
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    var name = Path.Combine(_environment.WebRootPath + "/Images", Path.GetFileName(image.FileName));
+                    await image.CopyToAsync(new FileStream(name, FileMode.Create));
+                    product.Image = "Images/" + image.FileName;
+                }
+
+                if (image == null)
+                {
+                    product.Image = "Images/noimage.PNG";
+                }
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,7 +111,7 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ProductCode,ProductName,ProductPrice,ProductDescription,IsAvailable,BrandNameID,SpecialTagID")] Product product)
+        public async Task<IActionResult> Edit(string id, [Bind("ProductCode,ProductName,ProductPrice,ProductDescription,Image,IsAvailable,BrandNameID,SpecialTagID")] Product product)
         {
             if (id != product.ProductCode)
             {
