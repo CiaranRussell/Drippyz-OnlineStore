@@ -47,12 +47,12 @@ app.MapAreaControllerRoute(
 app.MapAreaControllerRoute(
     name: "areas",
     areaName: "Admin",
-    pattern: "{controller=BrandNames}/{action=Index}/{id?}"
+    pattern: "{controller=}/{action=Index}/{id?}"
     );
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
