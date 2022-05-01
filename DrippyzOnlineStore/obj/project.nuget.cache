@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+b+LL+R8v2csIOuatK1vh2LQZzE/NAnNR/bBAKOE9PBCPuuRgXZYhUCZ3OAr3GyLuMab5DiuT1UHf6+pVjliCw==",
+  "dgSpecHash": "HFitEK2IajVnt2/7eLpCqfGhuOA0rWcbxBEKAbJo45x2lQZ1D8xumH+TPrwPKqOpI+1n/vTFEjc5DAgnJoKs6g==",
   "success": true,
   "projectFilePath": "C:\\EAD\\DrippyzOnlineStore\\DrippyzOnlineStore\\DrippyzOnlineStore.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Ciaran.Russell\\.nuget\\packages\\fluentassertions\\6.6.0\\fluentassertions.6.6.0.nupkg.sha512",
     "C:\\Users\\Ciaran.Russell\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Ciaran.Russell\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Ciaran.Russell\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

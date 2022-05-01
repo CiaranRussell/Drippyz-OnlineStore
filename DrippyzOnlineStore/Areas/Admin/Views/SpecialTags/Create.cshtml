@@ -1,24 +1,24 @@
-﻿@model DrippyzOnlineStore.Models.BrandNames
+﻿@model DrippyzOnlineStore.Models.SpecialTag
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h4>Enter New Brand</h4>
+<h4>Enter New Tag</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-area="Admin" asp-controller="BrandNames" asp-action="Index" class="btn btn-success">Back to List</a>
+                <a asp-area="Admin" asp-controller="SpecialTags" asp-action="Index" class="btn btn-success">Back to List</a>
             </div>
         </form>
     </div>

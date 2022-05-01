@@ -4,6 +4,7 @@ using DrippyzOnlineStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrippyzOnlineStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220420210523_addProductsdatabase")]
+    partial class addProductsdatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,12 +46,11 @@ namespace DrippyzOnlineStore.Data.Migrations
                     b.Property<string>("ProductCode")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("BrandNameID")
+                    b.Property<int>("Brand-ID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BrandNameID")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
@@ -66,14 +67,17 @@ namespace DrippyzOnlineStore.Data.Migrations
                     b.Property<double>("ProductPrice")
                         .HasColumnType("float");
 
+                    b.Property<int>("SpecialTag-ID")
+                        .HasColumnType("int");
+
                     b.Property<int>("SpecialTagID")
                         .HasColumnType("int");
 
                     b.HasKey("ProductCode");
 
-                    b.HasIndex("BrandNameID");
+                    b.HasIndex("Brand-ID");
 
-                    b.HasIndex("SpecialTagID");
+                    b.HasIndex("SpecialTag-ID");
 
                     b.ToTable("Products");
                 });
@@ -301,13 +305,13 @@ namespace DrippyzOnlineStore.Data.Migrations
                 {
                     b.HasOne("DrippyzOnlineStore.Models.BrandNames", "BrandID")
                         .WithMany()
-                        .HasForeignKey("BrandNameID")
+                        .HasForeignKey("Brand-ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DrippyzOnlineStore.Models.SpecialTag", "SpecialTag")
                         .WithMany()
-                        .HasForeignKey("SpecialTagID")
+                        .HasForeignKey("SpecialTag-ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

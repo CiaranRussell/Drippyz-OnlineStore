@@ -8,28 +8,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DrippyzOnlineStore.Data;
 using DrippyzOnlineStore.Models;
-using DrippyzOnlineStore.Areas;
 
 namespace DrippyzOnlineStore.Areas.Admin.Controller1
 {
     [Area("Admin")]
-    public class BrandNamesController : Controller
+    public class SpecialTagsController : Controller
     {
-        
         private readonly ApplicationDbContext _context;
 
-        public BrandNamesController(ApplicationDbContext context)
+        public SpecialTagsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/BrandNames
+        // GET: Admin/SpecialTags
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BrandNames.ToListAsync());
+            return View(await _context.SpecialTag.ToListAsync());
         }
 
-        // GET: Admin/BrandNames/Details/5
+        // GET: Admin/SpecialTags/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,40 +35,40 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
                 return NotFound();
             }
 
-            var brandNames = await _context.BrandNames
+            var specialTag = await _context.SpecialTag
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (brandNames == null)
+            if (specialTag == null)
             {
                 return NotFound();
             }
 
-            return View(brandNames);
+            return View(specialTag);
         }
 
-        // GET: Admin/BrandNames/Create
+        // GET: Admin/SpecialTags/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/BrandNames/Create
+        // POST: Admin/SpecialTags/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Brand")] BrandNames brandNames)
+        public async Task<IActionResult> Create([Bind("Id,Name")] SpecialTag specialTag)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(brandNames);
+                _context.Add(specialTag);
                 await _context.SaveChangesAsync();
-                TempData["save"] = "New Brand has been Added!";
+                TempData["save"] = "New Tag has been Added!";
                 return RedirectToAction(nameof(Index));
             }
-            return View(brandNames);
+            return View(specialTag);
         }
 
-        // GET: Admin/BrandNames/Edit/5
+        // GET: Admin/SpecialTags/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,22 +76,22 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
                 return NotFound();
             }
 
-            var brandNames = await _context.BrandNames.FindAsync(id);
-            if (brandNames == null)
+            var specialTag = await _context.SpecialTag.FindAsync(id);
+            if (specialTag == null)
             {
                 return NotFound();
             }
-            return View(brandNames);
+            return View(specialTag);
         }
 
-        // POST: Admin/BrandNames/Edit/5
+        // POST: Admin/SpecialTags/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand")] BrandNames brandNames)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] SpecialTag specialTag)
         {
-            if (id != brandNames.Id)
+            if (id != specialTag.Id)
             {
                 return NotFound();
             }
@@ -102,13 +100,13 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
             {
                 try
                 {
-                    _context.Update(brandNames);
-                    TempData["edit"] = "Brand Name has been Updated";
+                    _context.Update(specialTag);
+                    TempData["edit"] = "Tag Name has been Updated";
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BrandNamesExists(brandNames.Id))
+                    if (!SpecialTagExists(specialTag.Id))
                     {
                         return NotFound();
                     }
@@ -119,10 +117,10 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(brandNames);
+            return View(specialTag);
         }
 
-        // GET: Admin/BrandNames/Delete/5
+        // GET: Admin/SpecialTags/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +128,31 @@ namespace DrippyzOnlineStore.Areas.Admin.Controller1
                 return NotFound();
             }
 
-            var brandNames = await _context.BrandNames
+            var specialTag = await _context.SpecialTag
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (brandNames == null)
+            if (specialTag == null)
             {
                 return NotFound();
             }
 
-            return View(brandNames);
+            return View(specialTag);
         }
 
-        // POST: Admin/BrandNames/Delete/5
+        // POST: Admin/SpecialTags/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var brandNames = await _context.BrandNames.FindAsync(id);
-            _context.BrandNames.Remove(brandNames);
+            var specialTag = await _context.SpecialTag.FindAsync(id);
+            _context.SpecialTag.Remove(specialTag);
             await _context.SaveChangesAsync();
-            TempData["delete"] = "Brand has been deleted";
+            TempData["delete"] = "Tag has been deleted";
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BrandNamesExists(int id)
+        private bool SpecialTagExists(int id)
         {
-            return _context.BrandNames.Any(e => e.Id == id);
+            return _context.SpecialTag.Any(e => e.Id == id);
         }
     }
 }
